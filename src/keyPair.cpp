@@ -1,11 +1,20 @@
+#include "keyPair.h"
+
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
 
-using namespace std;
+keyPair::keyPair()
+{
+    generatePrivate();
+}
 
-int main () {
+keyPair::~keyPair()
+{
+    //dtor
+}
 
+void keyPair::generatePrivate(){
     fstream file;
     file.open("SISet.txt", fstream::out);
 
@@ -18,5 +27,10 @@ int main () {
         file << totalWeight;
         if (i < 31) file << ", ";
     }
+
+    q = totalWeight + (rand() % totalWeight);
+
+    file << q;
+
     return 0;
 }
