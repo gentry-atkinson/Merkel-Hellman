@@ -1,9 +1,11 @@
 #include <iostream>
 
+#include "include/keyPair.h"
+
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    keyPair kp;
     return 0;
 }

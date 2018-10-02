@@ -1,12 +1,23 @@
-#include "keyPair.h"
+#include "../include/keyPair.h"
 
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
 
+using namespace std;
+
 keyPair::keyPair()
 {
-    generatePrivate();
+    ifstream file("SISet.txt");
+    if (!file.good()){
+        generatePrivate();
+        generatePublic()
+    }
+
+    for (int i = 0; i < charSize; i++){
+
+    }
+    r = 197;
 }
 
 keyPair::~keyPair()
@@ -18,17 +29,32 @@ void keyPair::generatePrivate(){
     fstream file;
     file.open("SISet.txt", fstream::out);
 
-    long int totalWeight = 0;
+    //if (file.good()) return;
+    //else {
 
+    long int totalWeight = rand() %256;
+
+    int charSize = 8;
     srand (time(NULL));
 
-    for (int i = 0; i < 32; i++){
+    for (int i = 0; i < charSize; i++){
         totalWeight = 2*totalWeight + (rand() % 5) + 1;
         file << totalWeight;
-        if (i < 31) file << ", ";
+        file << ", ";
     }
+
+    int q = totalWeight + (rand() % totalWeight);
+
+    file << q;
+    //}
+
+    return;
+}
+
+void keyPair::generatePublic(){
+    fstream outfile;
+    file.open("RegSet.txt", fstream::out);
     
-    q = totalWeight + (rand() % totalWeight);
-    
-    return 0;
+    ifstream infile;
+    infline.open("SISet.txt");
 }
