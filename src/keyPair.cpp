@@ -65,7 +65,6 @@ void keyPair::generatePublic(){
     string input;
 
     for (int i = 0; i < charSize; i++){
-        inFile >> input;
-        beta[i] = stoi(input);
+        inFile >> beta[i];
     }
 }

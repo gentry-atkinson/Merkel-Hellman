@@ -3,21 +3,24 @@
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
+#include <string>
 
 using namespace std;
 
 keyPair::keyPair()
 {
-    ifstream file("SISet.txt");
-    if (!file.good()){
+    r = 197;
+    charSize = 8;
+
+    ifstream inFile("SISet.txt");
+    if (!inFile.good()){
         generatePrivate();
-        generatePublic()
+        generatePublic();
     }
 
     for (int i = 0; i < charSize; i++){
 
     }
-    r = 197;
 }
 
 keyPair::~keyPair()
@@ -52,9 +55,17 @@ void keyPair::generatePrivate(){
 }
 
 void keyPair::generatePublic(){
-    fstream outfile;
-    file.open("RegSet.txt", fstream::out);
-    
-    ifstream infile;
-    infline.open("SISet.txt");
+    fstream outFile;
+    outFile.open("RegSet.txt", fstream::out);
+
+    ifstream inFile;
+    inFile.open("SISet.txt");
+
+    int beta[8];
+    string input;
+
+    for (int i = 0; i < charSize; i++){
+        inFile >> input;
+        beta[i] = from_chars(input);
+    }
 }
