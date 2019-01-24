@@ -1,6 +1,6 @@
 #include "../include/keyPair.h"
 
-#include <fstream>
+//#include <fstream>
 #include <cstdlib>
 #include <time.h>
 #include <string>
@@ -10,11 +10,8 @@ using namespace std;
 keyPair::keyPair()
 {
     r = 197;
+    //we're going to assume 8-bit character encoding
     charSize = 8;
-
-    for (int i = 0; i < charSize; i++){
-
-    }
 }
 
 keyPair::~keyPair()
@@ -22,25 +19,18 @@ keyPair::~keyPair()
     //dtor
 }
 
-void keyPair::generatePrivate(){
-    fstream file;
-    file.open("SISet.txt", fstream::out);
+void keyPair::generatePrivate(int[] w, int& sigma_w, int& q, int& r, ofstream privKey){
 
-    //if (file.good()) return;
-    //else {
-
-    long int totalWeight = rand() %256;
-
-    int charSize = 8;
     srand (time(NULL));
-
-    for (int i = 0; i < charSize; i++){
-        totalWeight = 2*totalWeight + (rand() % 5) + 1;
-        file << totalWeight;
-        file << ", ";
+    sigma_w = 0;
+    w[0] = rand() % 32;
+    sigma_w += w[0];
+    for (int i = 1; i < charSize; i++){
+        w[i] = (2 * w[i-1]) + (rand() % 32);
+        sigma_w += w[i];
     }
 
-    int q = totalWeight + (rand() % totalWeight);
+    q = sigma_w + (rand() % sigma_w);
 
     file << q;
     //}
@@ -63,10 +53,14 @@ void keyPair::generatePublic(){
     }
 }
 
-void keyPair::generateKeys(){
-    ifstream inFile("SISet.txt");
-    if (!inFile.good()){
-        generatePrivate();
-        generatePublic();
-    }
+void keyPair::generateKeys(char* privName, char* pubName){
+    int w[] = {0,0,0,0,0,0,0,0};    //an SI set
+    int sigma_w;                   //the sum of w
+    int q;                         //a value greater than sigma_w
+    int r;                         //a value in [1,q] coprime to q
+    ofstream privKey(privName);
+    ofstream pubKey(pubName);
+    generatePrivate(w, sigma_w, q, r, privKey);
+
+    return;
 }
