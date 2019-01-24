@@ -11,8 +11,8 @@ class keyPair
         void generateKeys(char* privName="private.key", char* pubName="public.key");
 
     private:
-        void generatePrivate(int[], int&, int&, int&, fstream);
-        void generatePublic();
+        void generatePrivate(int[], int&, int&, int&, std::fstream&);
+        void generatePublic(int[], int&, int&, int&, std::fstream&);
         //bool isCoPrime(int, int);
         int* privateWeights;
         int q;
