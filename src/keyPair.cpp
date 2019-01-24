@@ -12,7 +12,6 @@ using namespace std;
 
 keyPair::keyPair()
 {
-    r = 197;
     //we're going to assume 8-bit character encoding
     charSize = 8;
 }
@@ -69,6 +68,7 @@ void keyPair::generateKeys(char* privName, char* pubName){
     int sigma_w;                   //the sum of w
     int q;                         //a value greater than sigma_w
     int r;                         //a value in [1,q] coprime to q
+
     fstream privKey;
     privKey.open(privName, std::fstream::out);
     fstream pubKey;
@@ -76,6 +76,14 @@ void keyPair::generateKeys(char* privName, char* pubName){
     generatePrivate(w, sigma_w, q, r, privKey);
     privKey.close();
     generatePublic(w, sigma_w, q, r, pubKey);
+    pubKey.close();
+
+    //clean up
+    for (int i = 0; i < charSize; i++)
+        w[i] = 0;
+    sigma_w = 0;
+    q = 0;
+    r = 0;
 
     return;
 }
