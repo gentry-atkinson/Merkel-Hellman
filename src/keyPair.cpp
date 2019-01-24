@@ -12,12 +12,6 @@ keyPair::keyPair()
     r = 197;
     charSize = 8;
 
-    ifstream inFile("SISet.txt");
-    if (!inFile.good()){
-        generatePrivate();
-        generatePublic();
-    }
-
     for (int i = 0; i < charSize; i++){
 
     }
@@ -66,5 +60,13 @@ void keyPair::generatePublic(){
 
     for (int i = 0; i < charSize; i++){
         inFile >> beta[i];
+    }
+}
+
+void keyPair::generateKeys(){
+    ifstream inFile("SISet.txt");
+    if (!inFile.good()){
+        generatePrivate();
+        generatePublic();
     }
 }
