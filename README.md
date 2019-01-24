@@ -1,6 +1,6 @@
 # Merkel-Hellman
 
-This is a simple (unsecure) command line implementation of the Merkell-Hellman Knapsack Cryptosystem. It's author is Gentry Atkinson, who can be reached at gma23@txstate.edu if you have any questions.
+This is a simple (unsecure) command line implementation of the Merkell-Hellman Knapsack Cryptosystem. Its author is Gentry Atkinson, who can be reached at gma23@txstate.edu if you have any questions.
 
 Usage:
 
