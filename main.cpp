@@ -35,6 +35,14 @@ int main(int argc, char** argv)
             if (strcmp(argv[1], "gen") == 0){
                 kp.generateKeys();
             }
+            break;
+        case 3:
+            char tempPriv[50], tempPub[50];
+            strcpy(tempPriv, argv[2]);
+            strcpy(tempPub, argv[2]);
+            if (strcmp(argv[1], "gen") == 0){
+                kp.generateKeys(strcat(tempPriv, ".private.key"), strcat(tempPub, ".public.key"));
+            }
     }
     return 0;
 }
