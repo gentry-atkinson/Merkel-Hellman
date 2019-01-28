@@ -49,6 +49,14 @@ int main(int argc, char** argv)
                 cout << argv[2] << endl;
                 w.encipher(argv[2],"public.key");
             }
+            break;
+        case 4:
+            if (strcmp(argv[1], "enc") == 0){
+                w.encipher(argv[2], argv[3]);
+            }
+            break;
+        default:
+            cerr << "Unrecognized input. Use \"MerkHell --help\" for syntax." << endl;
     }
     return 0;
 }
