@@ -65,6 +65,7 @@ void Writer::encipher(string textName, string keyName){
         bitArray[i] = 0;
         keyArray[i] = 0;
     }
+    nextChar = ' ';
     plainStream.close();
     cipherStream.close();
 
