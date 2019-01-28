@@ -2,7 +2,7 @@
 #include <cstring>
 #include "include/keyPair.h"
 #include "include/Writer.h"
-
+#include "include/Reader.h"
 
 using namespace std;
 
@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 {
     keyPair kp;
     Writer w;
+    Reader r;
     switch(argc){
         case 1:
             cout << "Usage:" << endl;
@@ -45,9 +46,15 @@ int main(int argc, char** argv)
             if (strcmp(argv[1], "gen") == 0){
                 kp.generateKeys(strcat(tempPriv, ".private.key"), strcat(tempPub, ".public.key"));
             }
-            if (strcmp(argv[1], "enc") == 0){
-                cout << argv[2] << endl;
+            else if (strcmp(argv[1], "enc") == 0){
                 w.encipher(argv[2],"public.key");
+            }
+            else if (strcmp(argv[1], "dec") == 0){
+                cout << argv[2] << endl;
+                r.decrypt(argv[2], "private.key");
+            }
+            else {
+                cerr << "Unrecognized input. Use \"MerkHell --help\" for syntax." << endl;
             }
             break;
         case 4:

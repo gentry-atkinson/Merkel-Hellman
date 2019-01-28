@@ -9,11 +9,11 @@ class Reader
     public:
         Reader();
         ~Reader();
-        void decrypt(std::string = "message.cypger", std::string = "private.key");
+        void decrypt(std::string = "message.cypher", std::string = "private.key");
 
     private:
-        int s;
-        int q;
+        static const int charSize = 8;
+        int w[charSize], q, r, s;
         void calcS();
 };
 
