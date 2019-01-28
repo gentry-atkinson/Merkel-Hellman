@@ -13,7 +13,6 @@ class keyPair
     private:
         void generatePrivate(int[], int&, int&, int&, std::fstream&);
         void generatePublic(int[], int&, int&, int&, std::fstream&);
-        //bool isCoPrime(int, int);
         int* privateWeights;
         int q;
         int* publicWeights;

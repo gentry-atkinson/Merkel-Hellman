@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "include/keyPair.h"
+#include "include/Writer.h"
 
 
 using namespace std;
@@ -8,6 +9,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
     keyPair kp;
+    Writer w;
     switch(argc){
         case 1:
             cout << "Usage:" << endl;
@@ -42,6 +44,10 @@ int main(int argc, char** argv)
             strcpy(tempPub, argv[2]);
             if (strcmp(argv[1], "gen") == 0){
                 kp.generateKeys(strcat(tempPriv, ".private.key"), strcat(tempPub, ".public.key"));
+            }
+            if (strcmp(argv[1], "enc") == 0){
+                cout << argv[2] << endl;
+                w.encipher(argv[2],"public.key");
             }
     }
     return 0;
