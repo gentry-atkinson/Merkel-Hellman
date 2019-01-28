@@ -36,9 +36,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Reader.h" />
 		<Unit filename="include/Writer.h" />
 		<Unit filename="include/keyPair.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Reader.cpp" />
 		<Unit filename="src/Writer.cpp" />
 		<Unit filename="src/keyPair.cpp" />
 		<Extensions>

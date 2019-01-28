@@ -1,4 +1,4 @@
-#include "Reader.h"
+#include "../include/Reader.h"
 
 #include <iostream>
 #include <fstream>
@@ -30,11 +30,13 @@ void Reader::decrypt(string messageName, string keyName){
     for (int i = 0; i < charSize; i++){
         keyFile >> incoming;
         w[i] = stoi(incoming);
+        //cout << w[i] << " ";
     }
     keyFile >> incoming;
     q = stoi(incoming);
     keyFile >> incoming;
     r = stoi(incoming);
+    //cout << endl << q << " " << r << endl;
     calcS();
     //cout << "S = " << s << endl;
 
@@ -43,18 +45,23 @@ void Reader::decrypt(string messageName, string keyName){
     plainFile.open("decrypt.txt");
     cypherFile.open(messageName);
 
-    int inNum;
+    long inNum;
     int outChar;
 
+    //cout << "****Message****" << endl;
     while (!cypherFile.eof()){
         cypherFile >> inNum;
         inNum = (inNum * s) % q;
-        for (int i = charSize - 1; i >= 0; i--){
+        //cout << inNum << " ";
+        outChar = 0;
+        for (int i = 7; i >= 0; i--){
             if(inNum >= w[i]){
                 inNum -= w[i];
                 outChar += pow(2, i);
+                //cout << pow(2,i) << endl;
             }
         }
+        //cout << outChar << endl;
         plainFile << static_cast<char>(outChar);
     }
 

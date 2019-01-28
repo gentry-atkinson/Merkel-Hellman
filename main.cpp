@@ -50,7 +50,7 @@ int main(int argc, char** argv)
                 w.encipher(argv[2],"public.key");
             }
             else if (strcmp(argv[1], "dec") == 0){
-                cout << argv[2] << endl;
+                //cout << argv[2] << endl;
                 r.decrypt(argv[2], "private.key");
             }
             else {
@@ -60,6 +60,12 @@ int main(int argc, char** argv)
         case 4:
             if (strcmp(argv[1], "enc") == 0){
                 w.encipher(argv[2], argv[3]);
+            }
+            else if (strcmp(argv[1], "dec") == 0){
+                r.decrypt(argv[2], argv[3]);
+            }
+            else {
+                cerr << "Unrecognized input. Use \"MerkHell --help\" for syntax." << endl;
             }
             break;
         default:
