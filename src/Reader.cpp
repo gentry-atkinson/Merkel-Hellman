@@ -21,6 +21,7 @@ void Reader::calcS(){
     s = 1;
     while ((s*r)%q != 1)
         s++;
+    //cout << "calcS says S is " << s << endl;
 }
 
 void Reader::decrypt(string messageName, string keyName){
@@ -52,24 +53,27 @@ void Reader::decrypt(string messageName, string keyName){
     while (!cypherFile.eof()){
         cypherFile >> inNum;
         inNum = (inNum * s) % q;
-        //cout << inNum << " ";
+        //cout << inNum << endl;
         outChar1 = 0;
         outChar2 = 0;
         for (int i = charSize-1; i >= charSize/2; i--){
             if(inNum >= w[i]){
+                //cout << w[i] << " ";
                 inNum -= w[i];
                 outChar2 += pow(2, i-(charSize/2));
-                //cout << pow(2,i) << endl;
+                //cout << pow(2, i-(charSize/2)) << " " << endl;
             }
         }
+        //cout << endl;
         for (int i = (charSize/2)-1; i >= 0; i--){
             if(inNum >= w[i]){
+                //cout << w[i] << " ";
                 inNum -= w[i];
                 outChar1 += pow(2, i);
-                //cout << pow(2,i) << endl;
+                //cout << pow(2,i) << " " << endl;
             }
         }
-        //cout << outChar << endl;
+        //cout << endl << "Char1: " << outChar1 << " Char2: " << outChar2 << endl << endl;
         plainFile << static_cast<char>(outChar1) << static_cast<char>(outChar2);
     }
 

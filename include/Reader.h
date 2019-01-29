@@ -13,7 +13,7 @@ class Reader
 
     private:
         static const int charSize = 16;
-        int w[charSize], q, r, s;
+        long w[charSize], q, r, s;
         void calcS();
 };
 

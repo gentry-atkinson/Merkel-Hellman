@@ -35,8 +35,11 @@ int main(int argc, char** argv)
                 cout << "MerkHell dec cypherfile keyfile:\tdecrypt a cyphertext file with a particular private key" << endl;
                 cout << "MerkHell --help:\tdisplay this menu" << endl;
             }
-            if (strcmp(argv[1], "gen") == 0){
+            else if (strcmp(argv[1], "gen") == 0){
                 kp.generateKeys();
+            }
+            else {
+                cerr << "Unrecognized input. Use \"MerkHell --help\" for syntax." << endl;
             }
             break;
         case 3:
