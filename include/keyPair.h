@@ -11,13 +11,9 @@ class keyPair
         void generateKeys(char* privName="private.key", char* pubName="public.key");
 
     private:
-        void generatePrivate(int[], int&, int&, int&, std::fstream&);
-        void generatePublic(int[], int&, int&, int&, std::fstream&);
-        int* privateWeights;
-        int q;
-        int* publicWeights;
-        int charSize;
-        int r;
+        void generatePrivate(long[], long&, long&, long&, std::fstream&);
+        void generatePublic(long[], long&, long&, long&, std::fstream&);
+        static const int charSize = 16;
 };
 
 #endif // KEYPAIR_H

@@ -46,23 +46,31 @@ void Reader::decrypt(string messageName, string keyName){
     cypherFile.open(messageName);
 
     long inNum;
-    int outChar;
+    int outChar1, outChar2;
 
     //cout << "****Message****" << endl;
     while (!cypherFile.eof()){
         cypherFile >> inNum;
         inNum = (inNum * s) % q;
         //cout << inNum << " ";
-        outChar = 0;
-        for (int i = 7; i >= 0; i--){
+        outChar1 = 0;
+        outChar2 = 0;
+        for (int i = charSize-1; i >= charSize/2; i--){
             if(inNum >= w[i]){
                 inNum -= w[i];
-                outChar += pow(2, i);
+                outChar2 += pow(2, i-(charSize/2));
+                //cout << pow(2,i) << endl;
+            }
+        }
+        for (int i = (charSize/2)-1; i >= 0; i--){
+            if(inNum >= w[i]){
+                inNum -= w[i];
+                outChar1 += pow(2, i);
                 //cout << pow(2,i) << endl;
             }
         }
         //cout << outChar << endl;
-        plainFile << static_cast<char>(outChar);
+        plainFile << static_cast<char>(outChar1) << static_cast<char>(outChar2);
     }
 
     return;

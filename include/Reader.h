@@ -12,7 +12,7 @@ class Reader
         void decrypt(std::string = "message.cypher", std::string = "private.key");
 
     private:
-        static const int charSize = 8;
+        static const int charSize = 16;
         int w[charSize], q, r, s;
         void calcS();
 };

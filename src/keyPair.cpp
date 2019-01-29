@@ -13,7 +13,6 @@ using namespace std;
 keyPair::keyPair()
 {
     //we're going to assume 8-bit character encoding
-    charSize = 8;
 }
 
 keyPair::~keyPair()
@@ -21,7 +20,7 @@ keyPair::~keyPair()
     //dtor
 }
 
-void keyPair::generatePrivate(int w[], int& sigma_w, int& q, int& r, fstream& privKey){
+void keyPair::generatePrivate(long w[], long& sigma_w, long& q, long& r, fstream& privKey){
     if (!privKey.is_open()){
         cerr << "key filestream not open" << endl;
         return;
@@ -41,7 +40,7 @@ void keyPair::generatePrivate(int w[], int& sigma_w, int& q, int& r, fstream& pr
         r = rand() % q;
     }while(__gcd(r,q) != 1);
 
-    for (int i = 0; i < 8; i++){
+    for (int i = 0; i < charSize; i++){
         privKey << w[i] << " ";
     }
     privKey << q << " ";
@@ -50,7 +49,7 @@ void keyPair::generatePrivate(int w[], int& sigma_w, int& q, int& r, fstream& pr
     return;
 }
 
-void keyPair::generatePublic(int w[], int& sigma_w, int& q, int& r, fstream& pubKey){
+void keyPair::generatePublic(long w[], long& sigma_w, long& q, long& r, fstream& pubKey){
     if(!pubKey.is_open()){
         cerr << "key filestream not open" << endl;
         return;
@@ -64,10 +63,10 @@ void keyPair::generatePublic(int w[], int& sigma_w, int& q, int& r, fstream& pub
 }
 
 void keyPair::generateKeys(char* privName, char* pubName){
-    int w[] = {0,0,0,0,0,0,0,0};    //an SI set
-    int sigma_w;                   //the sum of w
-    int q;                         //a value greater than sigma_w
-    int r;                         //a value in [1,q] coprime to q
+    long w[charSize] = {0};                  //an SI set
+    long sigma_w;                   //the sum of w
+    long q;                         //a value greater than sigma_w
+    long r;                         //a value in [1,q] coprime to q
 
     fstream privKey;
     privKey.open(privName, std::fstream::out);

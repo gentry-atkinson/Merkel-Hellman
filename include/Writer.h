@@ -12,9 +12,10 @@ class Writer
         void encipher(std::string = "plain.txt", std::string = "public.key");
 
     private:
-        void charToBits(char);
-        static const int charSize = 8;
-        int bitArray[charSize], keyArray[charSize];
+        void charToBits(char, char);
+        static const int charSize = 16;
+        int bitArray[charSize];
+        long keyArray[charSize];
 };
 
 #endif // WRITER_H

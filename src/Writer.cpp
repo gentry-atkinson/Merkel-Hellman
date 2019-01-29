@@ -17,10 +17,10 @@ Writer::~Writer()
     //dtor
 }
 
-void Writer::charToBits(char input){
-    //cout << endl << input << ": ";
-    int numInput = static_cast<int>(input);
-    for (int i = charSize - 1; i >= 0; i--){
+void Writer::charToBits(char input1, char input2){
+    cout << endl << input1 << input2 << ": ";
+    int numInput = static_cast<int>(input1);
+    for (int i = (charSize/2) - 1; i >= 0; i--){
         if (numInput >= pow(2, i)){
             numInput -= pow(2,i);
             bitArray[i] = 1;
@@ -28,14 +28,26 @@ void Writer::charToBits(char input){
         else{
             bitArray[i] = 0;
         }
-        //cout << bitArray[i];
+        cout << bitArray[i] << " ";
+    }
+
+    numInput = static_cast<int>(input2);
+    for (int i = (charSize/2) - 1; i >= 0; i--){
+        if (numInput >= pow(2, i)){
+            numInput -= pow(2,i);
+            bitArray[i+(charSize/2)] = 1;
+        }
+        else{
+            bitArray[i+(charSize/2)] = 0;
+        }
+        cout << bitArray[i+(charSize/2)] << " ";
     }
 
     return;
 }
 
 void Writer::encipher(string textName, string keyName){
-    char nextChar;
+    char nextChar1, nextChar2;
     int sumToWrite;
 
     ifstream keyStream;
@@ -52,8 +64,14 @@ void Writer::encipher(string textName, string keyName){
     cipherStream.open("message.cipher");
 
     while(!plainStream.eof()){
-        plainStream.get(nextChar);
-        charToBits(nextChar);
+        plainStream.get(nextChar1);
+        try{
+            plainStream.get(nextChar2);
+        }
+        catch(...){
+            nextChar2 = ' ';
+        }
+        charToBits(nextChar1, nextChar2);
         sumToWrite = 0;
         for (int i = 0; i < charSize; i++){
             sumToWrite += (bitArray[i] * keyArray[i]);
@@ -65,7 +83,8 @@ void Writer::encipher(string textName, string keyName){
         bitArray[i] = 0;
         keyArray[i] = 0;
     }
-    nextChar = ' ';
+    nextChar1 = ' ';
+    nextChar2 = ' ';
     plainStream.close();
     cipherStream.close();
 
