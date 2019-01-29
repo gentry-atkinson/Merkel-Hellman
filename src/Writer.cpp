@@ -18,7 +18,7 @@ Writer::~Writer()
 }
 
 void Writer::charToBits(char input1, char input2){
-    cout << endl << input1 << input2 << ": ";
+    //cout << endl << input1 << input2 << ": ";
     int numInput = static_cast<int>(input1);
     for (int i = (charSize/2) - 1; i >= 0; i--){
         if (numInput >= pow(2, i)){
@@ -28,7 +28,7 @@ void Writer::charToBits(char input1, char input2){
         else{
             bitArray[i] = 0;
         }
-        cout << bitArray[i] << " ";
+        //cout << bitArray[i] << " ";
     }
 
     numInput = static_cast<int>(input2);
@@ -40,7 +40,7 @@ void Writer::charToBits(char input1, char input2){
         else{
             bitArray[i+(charSize/2)] = 0;
         }
-        cout << bitArray[i+(charSize/2)] << " ";
+        //cout << bitArray[i+(charSize/2)] << " ";
     }
 
     return;
