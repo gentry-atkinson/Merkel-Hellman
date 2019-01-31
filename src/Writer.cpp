@@ -1,3 +1,13 @@
+/***************************************************
+*Author: Gentry Atkinson
+*Project: MerkHell
+*File: Writer.cpp
+*Date: 31 Jan, 2019
+*
+*This is a simple command line implementation of the
+*Merkel-Hellman knapsack cryptosystem.
+****************************************************/
+
 #include "../include/Writer.h"
 
 #include <math.h>
@@ -17,6 +27,8 @@ Writer::~Writer()
     //dtor
 }
 
+//Converts two char values to bits in a 16 value
+//int array
 void Writer::charToBits(char input1, char input2){
     //cout << endl << input1 << input2 << ": ";
     int numInput = static_cast<int>(input1);
@@ -46,6 +58,9 @@ void Writer::charToBits(char input1, char input2){
     return;
 }
 
+//Reads 2 chars at a time from a plaintext file.
+//Chars are converted to int value 'a'
+//Writes values (sum(a[i] * beta[i])) to ciphertext file
 void Writer::encipher(string textName, string keyName){
     char nextChar1, nextChar2;
     int sumToWrite;
@@ -65,11 +80,11 @@ void Writer::encipher(string textName, string keyName){
 
     while(!plainStream.eof()){
         plainStream.get(nextChar1);
-        try{
-            plainStream.get(nextChar2);
+        if(plainStream.eof()){
+            nextChar2 = '\n';
         }
-        catch(...){
-            nextChar2 = ' ';
+        else{
+            plainStream.get(nextChar2);
         }
         charToBits(nextChar1, nextChar2);
         sumToWrite = 0;

@@ -1,3 +1,15 @@
+/***************************************************
+*Author: Gentry Atkinson
+*Project: MerkHell
+*File: main.cpp
+*Date: 31 Jan, 2019
+*
+*This is a simple command line implementation of the
+*Merkel-Hellman knapsack cryptosystem.
+****************************************************/
+
+
+
 #include <iostream>
 #include <cstring>
 #include "include/keyPair.h"

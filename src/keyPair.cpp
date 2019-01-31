@@ -1,3 +1,13 @@
+/***************************************************
+*Author: Gentry Atkinson
+*Project: MerkHell
+*File: keyPair.cpp
+*Date: 31 Jan, 2019
+*
+*This is a simple command line implementation of the
+*Merkel-Hellman knapsack cryptosystem.
+****************************************************/
+
 #include "../include/keyPair.h"
 
 //#include <fstream>
@@ -12,7 +22,7 @@ using namespace std;
 
 keyPair::keyPair()
 {
-    //we're going to assume 8-bit character encoding
+    //ctor
 }
 
 keyPair::~keyPair()
@@ -20,6 +30,11 @@ keyPair::~keyPair()
     //dtor
 }
 
+//Outputs the private key:
+//  w-> a super increasing set of integer values
+//  sigma_w-> the sum of all w values
+//  q-> a value greater than sigma_w
+//  r-> a value less than q
 void keyPair::generatePrivate(long w[], long& sigma_w, long& q, long& r, fstream& privKey){
     if (!privKey.is_open()){
         cerr << "key filestream not open" << endl;
@@ -49,6 +64,8 @@ void keyPair::generatePrivate(long w[], long& sigma_w, long& q, long& r, fstream
     return;
 }
 
+//Outputs the public key:
+//  beta[i] = (w * r) mod q
 void keyPair::generatePublic(long w[], long& sigma_w, long& q, long& r, fstream& pubKey){
     if(!pubKey.is_open()){
         cerr << "key filestream not open" << endl;
@@ -62,6 +79,10 @@ void keyPair::generatePublic(long w[], long& sigma_w, long& q, long& r, fstream&
     return;
 }
 
+//Default private key name is "private.key"
+//Default public key name is "public.key"
+//
+//TODO: this method should only take a single name.
 void keyPair::generateKeys(char* privName, char* pubName){
     long w[charSize] = {0};                  //an SI set
     long sigma_w;                   //the sum of w

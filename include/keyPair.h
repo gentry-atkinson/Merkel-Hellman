@@ -1,3 +1,15 @@
+/***************************************************
+*Author: Gentry Atkinson
+*Project: MerkHell
+*File: keyPair.h
+*Date: 31 Jan, 2019
+*
+*This is a simple command line implementation of the
+*Merkel-Hellman knapsack cryptosystem.
+*
+*The keyPair class is used to generate key pairs.
+****************************************************/
+
 #ifndef KEYPAIR_H
 #define KEYPAIR_H
 

@@ -1,3 +1,13 @@
+/***************************************************
+*Author: Gentry Atkinson
+*Project: MerkHell
+*File: Reader.cpp
+*Date: 31 Jan, 2019
+*
+*This is a simple command line implementation of the
+*Merkel-Hellman knapsack cryptosystem.
+****************************************************/
+
 #include "../include/Reader.h"
 
 #include <iostream>
@@ -16,6 +26,8 @@ Reader::~Reader()
     //dtor
 }
 
+//Calculate the inverse of r mod q
+//TODO: use a decent algorithm
 void Reader::calcS(){
     //Please change this to use extended euclidean alg
     s = 1;
@@ -24,6 +36,8 @@ void Reader::calcS(){
     //cout << "calcS says S is " << s << endl;
 }
 
+//For each value in cipherfile, multiply by s mod q
+//Extract two char values using superincreasing set w
 void Reader::decrypt(string messageName, string keyName){
     ifstream keyFile;
     keyFile.open(keyName);
